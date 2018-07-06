@@ -8,13 +8,11 @@ namespace RealRandomGenerator
     public partial class Form1 : Form
     {
         Random rng = new Random();
-        int minValue = int.MaxValue;
-        int maxValue = int.MinValue;
         int maxRoll = 101;  // +1 for exclusive upper bound
-        int numRolls = 200;
-        int randomCeiling = int.MaxValue;
+        int numRolls = 1000;
+        int randomCeiling = 100;
         List<int> numbers = new List<int>();
-
+        List<int> badNumbers = new List<int>();
         public Form1()
         {
             InitializeComponent();
@@ -25,33 +23,26 @@ namespace RealRandomGenerator
             ResetForm();
             for (int i = 0; i < numRolls; i++)
             {
-                var number = JustRNG();
-                //var number = GenerateRealRandom();
+                var badNumber = JustRNG();
+                badNumbers.Add(badNumber);
+                var number = GenerateRealRandom();
                 numbers.Add(number);
-                textBox1.Text = $"{textBox1.Text}{number.ToString()}{Environment.NewLine}";
-                if (isNewMin(number))
-                {
-                    min.Text = number.ToString();
-                    min.Update();
-                }
-                if (isNewMax(number))
-                {
-                    max.Text = number.ToString();
-                    max.Update();
-                }
             }
-            avg.Text = numbers.Average().ToString();
+
+            double goodNum = numbers.Average();
+            double badNum = badNumbers.Average();
+
+            avg.Text = string.Format("{0:0.000}", goodNum);
+            badAvg.Text = string.Format("{0:0.000}", badNum);
         }
 
         private void ResetForm()
         {
-            textBox1.Clear();
-            numbers.Clear();
-            min.Text = "0";
-            max.Text = "0";
             avg.Text = "0";
-            minValue = int.MinValue;
-            maxValue = int.MaxValue;
+            badAvg.Text = "0";
+            lblDrops.Text = "0";
+            lblMaxRolls.Text = numRolls.ToString();
+            lblRAND_MAX.Text = randomCeiling.ToString();
         }
 
         public int JustRNG()
@@ -76,37 +67,12 @@ namespace RealRandomGenerator
             }
         }
 
-        public bool isNewMin(int number)
-        {
-            if (number < minValue)
-            {
-                minValue = number;
-                return true;
-            }
-            return false;
-        }
-
-        public bool isNewMax(int number)
-        {
-            if (number > maxValue)
-            {
-                maxValue = number;
-                return true;
-            }
-            return false;
-        }
-
         private void UpdateDrops()
         {
-            int dropNum = Convert.ToInt32(drops.Text.ToString());
+            int dropNum = Convert.ToInt32(lblDrops.Text.ToString());
             dropNum++;
-            drops.Text = dropNum.ToString();
-            drops.Update();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
+            lblDrops.Text = dropNum.ToString();
+            lblDrops.Update();
         }
     }
 }
