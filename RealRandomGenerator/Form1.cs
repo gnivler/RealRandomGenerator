@@ -55,7 +55,9 @@ namespace RealRandomGenerator
             int r = 0;
             while (true)
             {
+                maxRoll *= 2 - 1;
                 r = rng.Next(1, maxRoll);
+                
                 if (r < (randomCeiling) - (randomCeiling % r))
                 {
                     return r % maxRoll;
