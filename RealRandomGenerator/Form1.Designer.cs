@@ -65,9 +65,9 @@
             this.lblAvg.AutoSize = true;
             this.lblAvg.Location = new System.Drawing.Point(393, 39);
             this.lblAvg.Name = "lblAvg";
-            this.lblAvg.Size = new System.Drawing.Size(50, 13);
+            this.lblAvg.Size = new System.Drawing.Size(46, 13);
             this.lblAvg.TabIndex = 2;
-            this.lblAvg.Text = "Average:";
+            this.lblAvg.Text = "25 avg?";
             // 
             // label4
             // 
@@ -101,9 +101,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(267, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
+            this.label1.Size = new System.Drawing.Size(46, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Bad Average:";
+            this.label1.Text = "50 avg?";
             // 
             // label2
             // 

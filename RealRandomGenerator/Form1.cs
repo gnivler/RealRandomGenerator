@@ -9,8 +9,8 @@ namespace RealRandomGenerator
     {
         Random rng = new Random();
         int maxRoll = 101;  // +1 for exclusive upper bound
-        int numRolls = 1000;
-        int randomCeiling = 100;
+        int numRolls = 10000;
+        int randomCeiling = 50;
         List<int> numbers = new List<int>();
         List<int> badNumbers = new List<int>();
         public Form1()
@@ -55,7 +55,6 @@ namespace RealRandomGenerator
             int r = 0;
             while (true)
             {
-                maxRoll *= 2 - 1;
                 r = rng.Next(1, maxRoll);
                 
                 if (r < (randomCeiling) - (randomCeiling % r))
