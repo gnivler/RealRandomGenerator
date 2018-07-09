@@ -8,11 +8,16 @@ namespace RealRandomGenerator
     public partial class Form1 : Form
     {
         Random rng = new Random();
-        int maxRoll = 101;  // +1 for exclusive upper bound
-        int numRolls = 10000;
-        int randomCeiling = 50;
-        List<int> numbers = new List<int>();
-        List<int> badNumbers = new List<int>();
+        int highestRoll = 100;
+        int numRolls = 1000;
+        int RAND_MAX = 15;
+        int rollIterations;
+        int dropNum;
+        int r;
+        int dotNetNumber;
+        int myNumber;
+        List<int> myNumbers = new List<int>();
+        List<int> dotNetRNG = new List<int>();
         public Form1()
         {
             InitializeComponent();
@@ -21,45 +26,62 @@ namespace RealRandomGenerator
         public void Go_click(object sender, EventArgs e)
         {
             ResetForm();
+
             for (int i = 0; i < numRolls; i++)
             {
-                var badNumber = JustRNG();
-                badNumbers.Add(badNumber);
-                var number = GenerateRealRandom();
-                numbers.Add(number);
+                dotNetNumber = JustRNG();
+                dotNetRNG.Add(dotNetNumber);
+                myNumbers.Add(myNumber);
+                myNumber = GenerateRealRandom();
             }
 
-            double goodNum = numbers.Average();
-            double badNum = badNumbers.Average();
-
-            avg.Text = string.Format("{0:0.000}", goodNum);
-            badAvg.Text = string.Format("{0:0.000}", badNum);
+            double goodNum = myNumbers.Average();
+            double badNum = dotNetRNG.Average();
+            myAvg.Text = string.Format("{0:0.000}", goodNum);
+            dotNetAvg.Text = string.Format("{0:0.000}", badNum);
         }
 
         private void ResetForm()
         {
-            avg.Text = "0";
-            badAvg.Text = "0";
+            lblMaxRolls.Text = $"Need {numRolls} results!{Environment.NewLine}(Twice)";
+            lblMaxRolls.Update();
+            lblRollsDone.Text = numRolls.ToString();
+            lblRAND_MAX.Text = RAND_MAX.ToString();
+            myAvg.Text = "0";
+            dotNetAvg.Text = "0";
             lblDrops.Text = "0";
-            lblMaxRolls.Text = numRolls.ToString();
-            lblRAND_MAX.Text = randomCeiling.ToString();
+            lblRolls.Text = "0";
+            myNumbers.Clear();
+            dotNetRNG.Clear();
+            dotNetNumber = 0;
+            myNumber = 0;
+            r = 0;
+            dropNum = 0;
         }
 
         public int JustRNG()
         {
-            return rng.Next(1, maxRoll);
+            IncrementRollLabel();
+            return rng.Next(1, highestRoll + 1);
+        }
+
+        private void IncrementRollLabel()
+        {
+            rollIterations = (Convert.ToInt32(lblRollsDone.Text) + 1);
+            lblRollsDone.Text = rollIterations.ToString();
+            lblRollsDone.Update();
         }
 
         public int GenerateRealRandom()
         {
-            int r = 0;
+            r = 0;
             while (true)
             {
-                r = rng.Next(1, maxRoll);
-                
-                if (r < (randomCeiling) - (randomCeiling % r))
+                r = rng.Next(1, highestRoll);
+                IncrementRollLabel();
+                if (r < (RAND_MAX - (RAND_MAX % r)))
                 {
-                    return r % maxRoll;
+                    return r % highestRoll;
                 }
                 else
                 {
@@ -67,10 +89,10 @@ namespace RealRandomGenerator
                 }
             }
         }
-
+        
         private void UpdateDrops()
         {
-            int dropNum = Convert.ToInt32(lblDrops.Text.ToString());
+            dropNum = Convert.ToInt32(lblDrops.Text.ToString());
             dropNum++;
             lblDrops.Text = dropNum.ToString();
             lblDrops.Update();
