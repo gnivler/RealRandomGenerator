@@ -40,8 +40,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblRAND_MAX = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.lblRolls = new System.Windows.Forms.Label();
-            this.lblMaxRolls = new System.Windows.Forms.Label();
+            this.lblhighestRoll = new System.Windows.Forms.Label();
+            this.lblnumIterations = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Go
@@ -153,29 +153,29 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Roll bound:";
             // 
-            // lblRolls
+            // lblhighestRoll
             // 
-            this.lblRolls.AutoSize = true;
-            this.lblRolls.Location = new System.Drawing.Point(378, 17);
-            this.lblRolls.Name = "lblRolls";
-            this.lblRolls.Size = new System.Drawing.Size(13, 13);
-            this.lblRolls.TabIndex = 3;
-            this.lblRolls.Text = "0";
+            this.lblhighestRoll.AutoSize = true;
+            this.lblhighestRoll.Location = new System.Drawing.Point(378, 17);
+            this.lblhighestRoll.Name = "lblhighestRoll";
+            this.lblhighestRoll.Size = new System.Drawing.Size(13, 13);
+            this.lblhighestRoll.TabIndex = 3;
+            this.lblhighestRoll.Text = "0";
             // 
-            // lblMaxRolls
+            // lblnumIterations
             // 
-            this.lblMaxRolls.AutoSize = true;
-            this.lblMaxRolls.Location = new System.Drawing.Point(13, 68);
-            this.lblMaxRolls.Name = "lblMaxRolls";
-            this.lblMaxRolls.Size = new System.Drawing.Size(0, 13);
-            this.lblMaxRolls.TabIndex = 5;
+            this.lblnumIterations.AutoSize = true;
+            this.lblnumIterations.Location = new System.Drawing.Point(13, 68);
+            this.lblnumIterations.Name = "lblnumIterations";
+            this.lblnumIterations.Size = new System.Drawing.Size(0, 13);
+            this.lblnumIterations.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 112);
-            this.Controls.Add(this.lblMaxRolls);
+            this.Controls.Add(this.lblnumIterations);
             this.Controls.Add(this.lblDrops);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.Go);
@@ -186,7 +186,7 @@
             this.Controls.Add(this.lblAvg);
             this.Controls.Add(this.myAvg);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lblRolls);
+            this.Controls.Add(this.lblhighestRoll);
             this.Controls.Add(this.lblRAND_MAX);
             this.Controls.Add(this.lblRollsDone);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -214,8 +214,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblRAND_MAX;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label lblRolls;
-        private System.Windows.Forms.Label lblMaxRolls;
+        private System.Windows.Forms.Label lblhighestRoll;
+        private System.Windows.Forms.Label lblnumIterations;
     }
 }
 
