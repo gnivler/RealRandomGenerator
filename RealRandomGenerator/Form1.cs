@@ -9,8 +9,8 @@ namespace RealRandomGenerator
     {
         Random rng = new Random();
         int highestRoll = 100;
-        int numRolls = 1000;
-        int RAND_MAX = 15;
+        int numIterations = 10000;
+        int RAND_MAX = Int16.MaxValue;
         int rollIterations;
         int dropNum;
         int r;
@@ -27,25 +27,31 @@ namespace RealRandomGenerator
         {
             ResetForm();
 
-            for (int i = 0; i < numRolls; i++)
+            for (int i = 0; i < numIterations; i++)
             {
                 dotNetNumber = JustRNG();
+                myNumber = GenerateRealRandom(highestRoll);
                 dotNetRNG.Add(dotNetNumber);
                 myNumbers.Add(myNumber);
-                myNumber = GenerateRealRandom();
+                UpdateAverages();
             }
+        }
 
+        private void UpdateAverages()
+        {
             double goodNum = myNumbers.Average();
             double badNum = dotNetRNG.Average();
             myAvg.Text = string.Format("{0:0.000}", goodNum);
             dotNetAvg.Text = string.Format("{0:0.000}", badNum);
+            myAvg.Update();
+            dotNetAvg.Update();
         }
 
         private void ResetForm()
         {
-            lblMaxRolls.Text = $"Need {numRolls} results!{Environment.NewLine}(Twice)";
+            lblMaxRolls.Text = $"Need {numIterations} results!{Environment.NewLine}(Twice)";
             lblMaxRolls.Update();
-            lblRollsDone.Text = numRolls.ToString();
+            lblRollsDone.Text = numIterations.ToString();
             lblRAND_MAX.Text = RAND_MAX.ToString();
             myAvg.Text = "0";
             dotNetAvg.Text = "0";
@@ -72,14 +78,13 @@ namespace RealRandomGenerator
             lblRollsDone.Update();
         }
 
-        public int GenerateRealRandom()
+        public int GenerateRealRandom(int highestRoll)
         {
-            r = 0;
             while (true)
             {
-                r = rng.Next(1, highestRoll);
+                r = rng.Next(1, highestRoll + 1);  // exclusive upper bound
                 IncrementRollLabel();
-                if (r < (RAND_MAX - (RAND_MAX % r)))
+                if (r < (RAND_MAX - (RAND_MAX % highestRoll)))
                 {
                     return r % highestRoll;
                 }
